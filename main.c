@@ -1,35 +1,39 @@
 #include <stdio.h>
 
-void print(int i)
+void print(int i, int count, int count2)
 {
     if (i < 10)
     {
-        printf("  %d,", i);
+        if (count2 == count - 1)
+        {
+            printf("  %d", i);
+        }
+        else
+        {
+            printf("  %d,", i);
+        }
     }
     else if (10 <= i && i < 100)
     {
-        printf(" %d,", i);
+        if (count2 == count - 1)
+        {
+            printf(" %d", i);
+        }
+        else
+        {
+            printf(" %d,", i);
+        }
     }
     else if (i >= 100)
     {
-        printf("%d,", i);
-    }
-}
-
-// ham print2 dung de in ra ki tu khi xuong dong
-void print2(int i)
-{
-    if (i < 10)
-    {
-        printf("     ");
-    }
-    else if (10 <= i && i < 100)
-    {
-        printf("     ");
-    }
-    else if (i >= 100)
-    {
-        printf("     ");
+        if (count2 == count - 1)
+        {
+            printf("%d", i);
+        }
+        else
+        {
+            printf("%d,", i);
+        }
     }
 }
 
@@ -52,7 +56,7 @@ void print3(int i)
 
 void print_count(int count)
 {
-    if (count % 4 == 0)
+    if (count % 4 == 0 && count != 0)
     {
         printf("  ");
         print3(count);
@@ -72,28 +76,50 @@ void print_count(int count)
         printf("      ");
         print3(count);
     }
+    else if (count == 0)
+    {
+        printf("                 ");
+        print3(count);
+    }
 }
 
 int main()
 {
     int max_count = 0, max_val = 0;
-    for (int a = 304; a <= 308; a++)
+    for (int a = 190; a <= 220; a++)
     {
         printf("%d  ", a);
         int count = 0;
+        // caculate count
         for (int i = 2; i < a; i++)
         {
             if (a % i == 0)
             {
-                if (count % 4 == 0 && count != 0)
-                {
-                    printf("\n");
-                    print2(i);
-                }
-                print(i);
+                // if (count % 4 == 0 && count != 0)
+                // {
+                //     printf("\n");
+                //     print2(i);
+                // }
+                // print(i);
                 count++;
             }
         }
+        // this for loop is for printing with out , at the end
+        int count2 = 0;
+        for (int i = 2; i < a; i++)
+        {
+            if (a % i == 0)
+            {
+                if (count2 % 4 == 0 && count2 != 0)
+                {
+                    printf("\n");
+                    printf("     ");
+                }
+                print(i, count, count2);
+                count2++;
+            }
+        }
+
         if (count == max_count)
         {
             if (a > max_val)
